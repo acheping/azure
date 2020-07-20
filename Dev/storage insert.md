@@ -1,8 +1,8 @@
 # Prerequisites
 * SPN
- - Read and write role to the SPN
+    -  Read and write role to the SPN
 * System (Linux)
- - Hadoop
+    -  Hadoop
   + Core Site
   + TLS Acceleration (secure connection only)
   + env variables (Hadoop-env.sh)
