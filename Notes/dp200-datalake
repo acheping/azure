@@ -1,0 +1,93 @@
+DP200-201 - DATALAKE STORAGE
+
+ADLS Gen2
+Hierarchical namespace
+ - Access Control Lists for security per directory and file
+ - Throttling and timeout management
+ - Performance optimizations
+ADLS Gen2 API using abfs[s]://
+File System Driver
+File System A, B, C, ...
+
+DFS Endpoint and File System Driver. 
+ADLS Gen2 utilizes the ABFS driver, which is part of Apache Hadoop. For connectivity to ADLS Gen2, the ABFS driver utilizes the DFS endpoint to invoke performance and security optimizations.
+ - ABFS = Azure Blob File System
+ - DFS = Distributed File System 
+
+Blob Storage
+Blob storage can be useful when you are going to store only backup files, images and videos which have very less transaction on top of the blob storage may reduce your transaction cost.
+
+Differences between Gen1 and Gen2
+Gen 1 the hot/cold storage tier and the redundant storage’s were not available
+
+Differences between Blob Storage and Gen2
+ - The blob storage in Azure had the capability of hot and cold storage but was short of features like a directory, and file-level security.
+ - Directory and file-level security are available in Gen1
+ - Choose the storage based on your usage like analytical and non-analytical use cases.
+ - File System. There is a terminology difference with ADLS Gen2. The concept of a container (from blob storage) is referred to as a file system in ADLS Gen2.
+
+
+In order to overcome this difference in storage and features, Azure Data Lake Storage Gen2 is built on Azure Blob storage as its foundation.
+
+Azure Data Lake Gen 2 contains features from Azure Data Lake Storage Gen1 such as file system semantics, directory, file-level security, and scalability are combined with low-cost, tiered storage, high availability/disaster recovery capabilities from Azure Blob storage.
+
+Hierarchical namespace setting can't revert back.
+
+Pros of Azure Data Lake Gen 2 over Gen 1
+ - Azure Data Lake Gen 2 contains file system storage and object storage which is available in Blob storage which gives the flexibility to store Excel, Images, and Videos, etc.,
+ - Hierarchical File system leverages better query performance in ADLS Gen 2.
+ - Object storage leverage better scalability and is cost-effective.
+ - Granular security to files and directory level can be achieved with help of Role-based Access Control (RBAC) and Access Control List (ACLs)
+
+Cons of Azure Data Lake Gen 2 (Expecting Update soon for the below features)
+ - Snapshots and soft delete which available in Azure storage is not available in Gen 2
+ - Object-level storage tiers (such as hot/cold/archive) and lifecycle management are not available in Gen 2
+ - Direct connectivity from Power BI or Azure Analysis Services are not available. Power BI Dataflows can connect with Azure Data Lake Gen 2
+ - Integration with Azure Data Lake Analytics (U-SQL) is not available as of now in Gen 2
+
+Security in ADLS Gen2
+(1) Role-Based Access Control (RBAC). RBAC includes built-in Azure roles such as reader, contributor, owner or custom roles. Typically, RBAC is assigned for two reasons. One is to specify who can manage the service itself (i.e., update settings and properties for the storage account). Another reason is to permit use of the built-in data explorer tools, which require reader permissions.
+
+(2) Access Control Lists (ACLs). Access control lists specify exactly which data objects a user may read, write, or execute (execute is required to browse the directory structure). ACLs are POSIX-compliant, thus familiar to those with a Unix or Linux background.
+
+
+ADLS Gen 2 features
+Integration
+Scalability
+Cost effective
+Performance
+Security
+Fault Tolerant/High availability/Disaster recovery
+Global footprint
+
+Access tiers
+ - You can choose the hot access tier at the time of creating the Storage Account V2 (Data Lake Gen 2).
+ - You can also change the access tier by object level once you created the storage account which was available in blob Storage not in Azure Data Lake Gen 2 General availability.
+
+Upgrade V1 to Gen2
+To convert the existing Blob Storage Account v1 to Gen 2, you need to upgrade the storage account from V1 to V2 by clicking the upgrade button under configuration and enable the Hierarchical Namespace under the Data Lake Gen 2.
+
+Pricing
+ - When we compare the Azure Data Lake Gen 2 pricing with Gen 1, Gen 2 pricing will be half the price of Gen 1.
+ - Storage cost for Blob storage and Gen 2 will be the same.
+ - When comparing the transaction cost of Gen 2 and Blob storage, Gen2 transaction cost is a little high due to the overhead of namespace.
+
+Storage account - kind of disks
+ - Standard : Magnetic disks
+ - Premium : Solid State drive
+
+Monitoring
+Activity Logs 20 days
+Metrics 93 days
+
+E2E Latency vs Server Latency
+E2E Latency include network latency and Server Latency
+
+Logs are store into Blob container
+Metrics are stored into Tables
+
+Notes
+DistCp is running on HDI
+
+Security
+Enable Data Lake Storage Gen2 during storage account creation automatically disable Data protection (Blob soft delete).
